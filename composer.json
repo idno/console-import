@@ -2,7 +2,7 @@
     "name": "idno/console-import",
     "type": "known-console",
     "description": "Import data into your Known install from the command line",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "require": {
         "composer/installers": "~1.0"
     },

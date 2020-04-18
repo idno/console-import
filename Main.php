@@ -27,16 +27,17 @@ namespace ConsolePlugins\Import {
             if (!file_exists($filename))
                 throw new \RuntimeException(\Idno\Core\Idno::site()->language()->_('Import file %s could not be found.', [$filename]));
 
-            $xml = file_get_contents($filename);
-
             $imported = false;
             switch (strtolower($import_type)) {
 
                 case 'blogger':
-                    $imported = Migration::importBloggerXML($xml);
+                    $imported = Migration::importBloggerXML(file_get_contents($filename));
                     break;
                 case 'wordpress':
-                    $imported = Migration::importWordPressXML($xml);
+                    $imported = Migration::importWordPressXML(file_get_contents($filename));
+                    break;
+                case 'known':
+                    $imported = Migration::importCompressedArchive($filename);
                     break;
                 default:
                     throw new \RuntimeException(\Idno\Core\Idno::site()->language()->_('%s is an unrecognised import type', [$import_type]));
